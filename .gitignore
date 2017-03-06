@@ -1,0 +1,11 @@
+### Python template
+*.py[cod]
+
+# virtualenv
+venv/
+
+# Pycharm
+.idea
+
+# SQLlite
+*.db

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Summary History{% endblock %}
+
+{% block content %}
+    <form class="form-horizontal" method="GET" action="">
+        <div class="form-group">
+                {{ forms.identifier.label }} {{ forms.identifier(size=9) }}
+                {{ forms.date_from.label }} {{ forms.date_from(size=9) }}
+                {{ forms.date_to.label }} {{ forms.date_to(size=9) }}
+            <input class="btn btn-outline-primary" type="submit" value="Filter"/>
+        </div>
+    </form>
+    <hr/>
+    <table class="col-lg-6">
+        <thead>
+            <tr>
+                <td class="col-dm-1">
+                    <a href="?id=1">
+                        ID
+                    </a>
+                </td>
+                <td class="col-dm-1">date</td>
+                <td class="col-dm-1">game</td>
+                <td class="col-dm-1">min</td>
+                <td class="col-dm-1">plays</td>
+                <td class="col-dm-1">wagered</td>
+                <td class="col-dm-1">wagered/plays</td>
+                <td class="col-dm-1">winnings</td>
+                <td class="col-dm-1">pending</td>
+                <td class="col-dm-1">identifier</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rec in page_records %}
+                <tr>
+                    <td class="col-dm-1">
+                        <a href="/detail/{{ rec.id }}">
+                            {{ rec.id }}
+                        </a>
+                    </td>
+                    <td>{{ rec.date }}</td>
+                    <td>{{ rec.game }}</td>
+                    <td>{{ rec.min }}</td>
+                    <td>{{ rec.plays }}</td>
+                    <td>{{ rec.wagered }}</td>
+                    <td>{{ rec.wagered / rec.plays }}</td>
+                    <td>{{ rec.winnings }}</td>
+                    <td>{{ rec.pending }}</td>
+                    <td>{{ rec.identifier }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

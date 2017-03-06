@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Base page{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" media="screen" href = "{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+    {% block sidebar %}
+    <nav role="navigation" class="col-lg-6">
+        <span class="col-sm-3 col-xs-8"><a class="navbar-brand" href="{{ url_for('summary') }}">Summary</a></span>
+        <span class="col-sm-3 col-xs-8"><a class="navbar-brand" href="{{ url_for('detail') }}">Detail</a></span>
+        <span class="col-sm-3 col-xs-8"><a class="navbar-brand" href="{{ url_for('description') }}">Description</a></span>
+    </nav>
+    {% endblock %}
+
+    <div id="content">
+        <hr/>
+        {% block content %}{% endblock %}
+    </div>
+
+</head>
+<body>
+
+    <div id="paginator">
+        {% block pagin %}
+
+        {% if prev_page %}
+        <a href="?page={{ prev_page }}">
+            <button type="button" class="btn btn-outline-success btn-sm" data-toggle="tooltip"
+                    data-placement="left" title="To previous page">
+                Previous
+            </button>
+        </a>
+        {% endif %}
+            <span class="current">
+                <p1>Page {{ page }} of {{ pages_count }}</p1>
+            </span>
+
+            {% if next_page <= pages_count %}
+            <a href="?page={{ next_page }}  ">
+
+                <button type="button" class="btn btn-outline-success btn-sm" data-toggle="tooltip"
+                        data-placement="right" title="To next page">
+                    Next
+                </button>
+            </a>
+        {% endif %}
+
+        {% endblock %}
+    </div>
+
+</body>
+</html>

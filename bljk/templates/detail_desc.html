@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Detail Description{% endblock %}
+
+{% block content %}
+    <hr/>
+    <table class="col-lg-6">
+        <thead>
+            <tr>
+                <td class="col-dm-1">id</td>
+                <td class="col-dm-1">hand</td>
+                <td class="col-dm-1">summ</td>
+                <td class="col-dm-2">cards</td>
+                <td class="col-dm-1">action</td>
+                <td class="col-dm-1">rate</td>
+                <td class="col-dm-1">win</td>
+                <td class="col-dm-1">detail_id</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rec in page_records %}
+            <tr>
+                <td>{{ rec.id }}</td>
+                <td>{{ rec.hand }}</td>
+                <td>{{ rec.summ }}</td>
+                <td>{{ rec.cards }}</td>
+                <td>{{ rec.action }}</td>
+                <td>{{ rec.rate }}</td>
+                <td>{{ rec.win }}</td>
+                <td>{{ rec.detail_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
