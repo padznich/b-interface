@@ -17,7 +17,11 @@
         <tbody>
             {% for rec in page_records %}
             <tr>
-                <td>{{ rec.id }}</td>
+                <td>
+                    <a href="/description/{{ rec.id }}/">
+                        {{ rec.id }}
+                    </a>
+                </td>
                 <td>{{ rec.game_id }}</td>
                 <td>{{ rec.time }}</td>
                 <td>{{ rec.wagered }}</td>

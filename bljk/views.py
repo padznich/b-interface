@@ -19,26 +19,53 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/summary', methods=['GET', ])
-@app.route('/summary/', methods=['GET', ])
-@app.route('/summary/identifier/<string:identifier>/')
-@app.route('/summary/identifier/<string:identifier>'
-           '/from/<string:_from>/to/<string:_to>/')
-@app.route('/summary/from/<string:_from>/to/<string:_to>/')
-def summary(page=1, identifier=None, _from=None, _to=None):
+@app.route('/summary', methods=['GET', 'POST'])
+@app.route('/summary/', methods=['GET', 'POST'])
+@app.route('/summary/'
+           'identifier/<string:identifier>/')
+@app.route('/summary/'
+           'identifier/<string:identifier>/'
+           'from/<string:_from>/'
+           'to/<string:_to>/')
+@app.route('/summary/'
+           'from/<string:_from>/'
+           'to/<string:_to>/')
+@app.route('/summary/'
+           'col/<string:col>/<string:_order>/')
+@app.route('/summary/'
+           'identifier/<string:identifier>/'
+           'col/<string:col>/<string:_order>/')
+@app.route('/summary/'
+           'identifier/<string:identifier>/'
+           'from/<string:_from>/'
+           'to/<string:_to>/'
+           'col/<string:col>/<string:_order>/')
+@app.route('/summary/'
+           'from/<string:_from>/'
+           'to/<string:_to>/'
+           'col/<string:col>/<string:_order>/')
+def summary(col=None, _order=None, identifier=None, _from=None, _to=None):
 
     query = Summary.query
-    query = order(query, Summary)
 
-    form = FormSummary()
+    page = request.args.get("page", None) or 1
 
-    if request.args.get('page', None):
-        page = request.args.get('page')
+    _order = _order or "asc"
+
+    if col == unicode("wagered_plays") and _order == "desc":
+        query = query.order_by(Summary.wagered.asc(),
+                               Summary.plays.desc())
+    elif col == unicode("wagered_plays") and _order == "asc":
+        query = query.order_by(Summary.wagered.desc(),
+                               Summary.plays.asc())
+    else:
+        col = col or "id"
+        query = order(query, Summary, col, _order)
 
     if identifier:
         query = query.filter_by(
             identifier=identifier
-        )
+        ).order_by(Summary.identifier.desc())
 
     if _from or _to:
         _from = _from or "2000-01-01"
@@ -48,94 +75,84 @@ def summary(page=1, identifier=None, _from=None, _to=None):
                 _from,
                 _to
             )
-        )
+        ).order_by(Summary.date.desc())
 
-    _identifier = request.values.get('identifier', None)
-    _from = request.values.get('date_from', None)
-    _to = request.values.get('date_to', None)
+    form = FormSummary()
+
+    _identifier = request.values.get('identifier')
+    _from = request.values.get('date_from')
+    _to = request.values.get('date_to')
 
     if _identifier and (_from or _to):
         _from = _from or "2000-01-01"
         _to = _to or datetime.now().strftime("%Y-%m-%d")
         return redirect(
             "/summary/identifier/{}/from/{}/to/{}/".format(
-                _identifier, _from, _to
-            )
+                _identifier, _from, _to)
         )
 
     if _identifier:
-        return redirect(
-            "/summary/identifier/{}/".format(
-                _identifier
-            ),
-        )
+        return redirect("/summary/identifier/{}/".format(_identifier))
 
     if _from or _to:
         _from = _from or "2000-01-01"
         _to = _to or datetime.now().strftime("%Y-%m-%d")
-        return redirect(
-            "/summary/from/{}/to/{}/".format(
-                _from, _to
-            )
-        )
-
-    # Columns Sorting
-    if request.method == "GET":
-        print '-' * 90
-        print request
-        if request.values.get('id', None):
-            if _order == "asc":
-                print 11
-                global _order
-                _order = "desc"
-            else:
-                print 12
-                global _order
-                _order = "asc"
-            query = query.order_by(Summary.id.asc())
+        return redirect("/summary/from/{}/to/{}/".format(
+            _from, _to
+        ))
 
     context = paginate(page, query)
 
-    return render_template('summary.html',
-                           urlic='summary',
+    urlic = request.base_url
+    if "col" in urlic.split("/"):
+        urlic = "/".join(urlic.split("/")[:-4]) + "/"
+
+    return render_template("summary.html",
+                           urlic=urlic,
                            forms=form,
                            **context)
 
 
 @app.route('/detail')
-@app.route('/detail/<int:summ_id>')
+@app.route('/detail/<int:summ_id>/')
 def detail(page=1, summ_id=None):
 
     query = Detail.query
+    query = order(query, Detail, "id", "asc")
 
     if summ_id:
-        query = query.filter_by(
-            summary_id=summ_id
-        )
+        query = query.filter_by(summary_id=summ_id)
 
     if request.args.get('page', None):
         page = request.args.get('page')
 
     if request.args.get("_id", None):
         summary_id = request.args.get("_id")
+        print summary_id
         query = query.filter_by(
             summary_id=summary_id
         )
 
     context = paginate(page, query)
+    urlic = request.base_url
 
-    return render_template('detail.html', urlic='detail', **context)
+    return render_template('detail.html', urlic=urlic, **context)
 
 
 @app.route('/description')
-@app.route('/description/')
-def description(page=1):
+@app.route('/description/<int:detail_id>/')
+def description(page=1, detail_id=None):
 
     query = Description.query
+    query = order(query, Description, "id", "asc")
+
+    if detail_id:
+        query = query.filter_by(detail_id=detail_id)
 
     if request.args.get('page', None):
         page = request.args.get('page')
 
     context = paginate(page, query)
+    urlic = request.base_url
 
-    return render_template('detail_desc.html', urlic='detail_desc', **context)
+    return render_template('description.html', urlic=urlic, **context)

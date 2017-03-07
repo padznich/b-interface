@@ -11,30 +11,146 @@
         </div>
     </form>
     <hr/>
-    <table class="col-lg-6">
-        <thead>
+    <table class="col-lg-12">
+        <thead id="head">
             <tr>
                 <td class="col-dm-1">
-                    <a href="?id=1">
-                        ID
-                    </a>
+                    ID
+                    <div class="btn-group btn-group-xs" role="group">
+                        <a href="{{ urlic }}col/id/desc/">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                        <a href="{{ urlic }}col/id/asc">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                    </div>
                 </td>
-                <td class="col-dm-1">date</td>
-                <td class="col-dm-1">game</td>
-                <td class="col-dm-1">min</td>
-                <td class="col-dm-1">plays</td>
-                <td class="col-dm-1">wagered</td>
-                <td class="col-dm-1">wagered/plays</td>
-                <td class="col-dm-1">winnings</td>
-                <td class="col-dm-1">pending</td>
-                <td class="col-dm-1">identifier</td>
+                <td class="col-dm-1">
+                    DATE
+                    <div class="btn-group btn-group-xs" role="group">
+                        <a href="{{ urlic }}col/date/desc/">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                        <a href="{{ urlic }}col/date/asc">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                    </div>
+                </td>
+                <td class="col-dm-1">
+                    GAME
+                    <div class="btn-group btn-group-xs" role="group">
+                        <a href="{{ urlic }}col/game/desc/">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                        <a href="{{ urlic }}col/game/asc">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                    </div>
+                </td>
+                <td class="col-dm-1">
+                    MIN
+                    <div class="btn-group btn-group-xs" role="group">
+                        <a href="{{ urlic }}col/min/desc/">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                        <a href="{{ urlic }}col/min/asc">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                    </div>
+                </td>
+                <td class="col-dm-1">
+                    PLAYS
+                    <div class="btn-group btn-group-xs" role="group">
+                        <a href="{{ urlic }}col/plays/desc/">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                        <a href="{{ urlic }}col/plays/asc">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                    </div>
+                </td>
+                <td class="col-dm-1">
+                    WAGERED
+                    <div class="btn-group btn-group-xs" role="group">
+                        <a href="{{ urlic }}col/wagered/desc/">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                        <a href="{{ urlic }}col/wagered/asc">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                    </div>
+                </td>
+                <td class="col-dm-1">
+                    WAGERED / PLAYS
+                    <div class="btn-group btn-group-xs" role="group">
+                        <!--<a href="{{ urlic }}col/wagered_plays/desc/">-->
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        <!--</a>-->
+                        <!--<a href="{{ urlic }}col/wagered_plays/asc">-->
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        <!--</a>-->
+                    </div>
+                </td>
+                <td class="col-dm-1">
+                    WINNINGS
+                    <div class="btn-group btn-group-xs" role="group">
+                        <a href="{{ urlic }}col/winnings/desc/">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                        <a href="{{ urlic }}col/winnings/asc">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                    </div>
+                </td>
+                <td class="col-dm-1">
+                    PENDING
+                    <div class="btn-group btn-group-xs" role="group">
+                        <a href="{{ urlic }}col/pending/desc/">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                        <a href="{{ urlic }}col/pending/asc">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                    </div>
+                </td>
+                <td class="col-dm-1">
+                    IDENTIFIER
+                    <div class="btn-group btn-group-xs" role="group">
+                        <a href="{{ urlic }}col/identifier/desc/">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                        <a href="{{ urlic }}col/identifier/asc">
+                            <button type="button" class="btn btn-default btn-xs">
+                            </button>
+                        </a>
+                    </div>
+                </td>
             </tr>
         </thead>
         <tbody>
             {% for rec in page_records %}
                 <tr>
                     <td class="col-dm-1">
-                        <a href="/detail/{{ rec.id }}">
+                        <a href="/detail/{{ rec.id }}/">
                             {{ rec.id }}
                         </a>
                     </td>
