@@ -2,6 +2,14 @@
 {% block title %}Detail History{% endblock %}
 
 {% block content %}
+    <form class="form-horizontal" method="get" action="">
+        <div class="form-group">
+            {{ form.csrf_token }}
+            {{ form.identifier.label }} {{ form.identifier }}
+        <input class="btn btn-outline-primary" type="submit" value="Filter"/>
+        </div>
+    </form>
+    <hr/>
     <table class="col-lg-6">
         <thead>
             <tr>

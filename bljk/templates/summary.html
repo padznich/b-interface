@@ -21,7 +21,7 @@
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/id/asc">
+                        <a href="{{ urlic }}col/id/asc/">
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
@@ -34,7 +34,7 @@
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/date/asc">
+                        <a href="{{ urlic }}col/date/asc/">
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
@@ -47,7 +47,7 @@
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/game/asc">
+                        <a href="{{ urlic }}col/game/asc/">
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
@@ -60,7 +60,7 @@
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/min/asc">
+                        <a href="{{ urlic }}col/min/asc/">
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
@@ -73,7 +73,7 @@
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/plays/asc">
+                        <a href="{{ urlic }}col/plays/asc/">
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
@@ -86,23 +86,23 @@
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/wagered/asc">
+                        <a href="{{ urlic }}col/wagered/asc/">
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
                     </div>
                 </td>
                 <td class="col-dm-1">
-                    WAGERED / PLAYS
+                    RATE
                     <div class="btn-group btn-group-xs" role="group">
-                        <!--<a href="{{ urlic }}col/wagered_plays/desc/">-->
+                        <a href="{{ urlic }}col/rate/desc/">
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
-                        <!--</a>-->
-                        <!--<a href="{{ urlic }}col/wagered_plays/asc">-->
+                        </a>
+                        <a href="{{ urlic }}col/rate/asc/">
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
-                        <!--</a>-->
+                        </a>
                     </div>
                 </td>
                 <td class="col-dm-1">
@@ -112,7 +112,7 @@
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/winnings/asc">
+                        <a href="{{ urlic }}col/winnings/asc/">
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
@@ -125,7 +125,7 @@
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/pending/asc">
+                        <a href="{{ urlic }}col/pending/asc/">
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
@@ -138,7 +138,7 @@
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/identifier/asc">
+                        <a href="{{ urlic }}col/identifier/asc/">
                             <button type="button" class="btn btn-default btn-xs">
                             </button>
                         </a>
@@ -150,7 +150,7 @@
             {% for rec in page_records %}
                 <tr>
                     <td class="col-dm-1">
-                        <a href="/detail/{{ rec.id }}/">
+                        <a href="/detail/summary/{{ rec.id }}/">
                             {{ rec.id }}
                         </a>
                     </td>
@@ -159,7 +159,7 @@
                     <td>{{ rec.min }}</td>
                     <td>{{ rec.plays }}</td>
                     <td>{{ rec.wagered }}</td>
-                    <td>{{ rec.wagered / rec.plays }}</td>
+                    <td>{{ rec.rate }}</td>
                     <td>{{ rec.winnings }}</td>
                     <td>{{ rec.pending }}</td>
                     <td>{{ rec.identifier }}</td>

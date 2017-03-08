@@ -3,15 +3,12 @@
 from datetime import datetime
 
 from flask import render_template, redirect, request
+from sqlalchemy_utils import sort_query
 
 from bljk.app import app
-from bljk.forms import FormSummary
+from bljk.forms import FormSummary, FormDetail
 from libs.paginator import paginate
-from libs.sorter import order
-from bljk.models import Summary, Detail, Description
-
-
-_order = "asc"
+from bljk.models import Summary, Detail, Description, db
 
 
 @app.route('/')
@@ -46,21 +43,30 @@ def home():
            'col/<string:col>/<string:_order>/')
 def summary(col=None, _order=None, identifier=None, _from=None, _to=None):
 
-    query = Summary.query
+    query = db.session.query(
+            Summary.id,
+            Summary.date,
+            Summary.game,
+            Summary.min,
+            Summary.plays,
+            Summary.wagered,
+            Summary.winnings,
+            Summary.pending,
+            Summary.identifier,
+            (Summary.wagered / Summary.plays).label("rate")
+        )
 
-    page = request.args.get("page", None) or 1
+    page = request.args.get("page") or 1
 
     _order = _order or "asc"
 
-    if col == unicode("wagered_plays") and _order == "desc":
-        query = query.order_by(Summary.wagered.asc(),
-                               Summary.plays.desc())
-    elif col == unicode("wagered_plays") and _order == "asc":
-        query = query.order_by(Summary.wagered.desc(),
-                               Summary.plays.asc())
+    if col and _order == "desc":
+        query = sort_query(query, "-" + col)
+    elif col and _order == "asc":
+        query = sort_query(query, col)
     else:
         col = col or "id"
-        query = order(query, Summary, col, _order)
+        query = sort_query(query, col)
 
     if identifier:
         query = query.filter_by(
@@ -114,29 +120,54 @@ def summary(col=None, _order=None, identifier=None, _from=None, _to=None):
 
 
 @app.route('/detail')
-@app.route('/detail/<int:summ_id>/')
-def detail(page=1, summ_id=None):
+@app.route('/detail/summary/<int:summ_id>/')
+@app.route('/detail/identifier/<string:identifier>/')
+def detail(page=1, summ_id=None, identifier=None):
 
     query = Detail.query
-    query = order(query, Detail, "id", "asc")
+    query = sort_query(query, 'id')
 
     if summ_id:
         query = query.filter_by(summary_id=summ_id)
+    if identifier:
+        query = query.filter_by(identifier=identifier)
 
-    if request.args.get('page', None):
+    if request.args.get('page'):
         page = request.args.get('page')
 
-    if request.args.get("_id", None):
+    if request.args.get("_id"):
         summary_id = request.args.get("_id")
         print summary_id
         query = query.filter_by(
             summary_id=summary_id
         )
 
+    form = FormDetail()
+    ident_list = set(
+        [
+            (row.identifier, row.identifier)
+            for row in
+            Detail.query.distinct(Detail.identifier).all()
+        ]
+    )
+    print "-" * 100
+    print ident_list
+    print Detail.query.distinct(Detail.identifier)
+    print "-" * 100
+
+    form.identifier.choices = ident_list
+
+    _identifier = request.values.get("identifier")
+    if _identifier:
+        return redirect("/detail/identifier/{}/".format(_identifier))
+
     context = paginate(page, query)
     urlic = request.base_url
 
-    return render_template('detail.html', urlic=urlic, **context)
+    return render_template('detail.html',
+                           urlic=urlic,
+                           form=form,
+                           **context)
 
 
 @app.route('/description')
@@ -144,12 +175,12 @@ def detail(page=1, summ_id=None):
 def description(page=1, detail_id=None):
 
     query = Description.query
-    query = order(query, Description, "id", "asc")
+    query = sort_query(query, 'id')
 
     if detail_id:
         query = query.filter_by(detail_id=detail_id)
 
-    if request.args.get('page', None):
+    if request.args.get('page'):
         page = request.args.get('page')
 
     context = paginate(page, query)
