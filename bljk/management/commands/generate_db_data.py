@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime, timedelta
+import random
 
 from flask_script import Command
 
@@ -12,6 +13,22 @@ class FillDB(Command):
     def __init__(self, _idents=3, _days=60):
         self._idents = _idents
         self._days = _days
+
+    def description_obj(self, _detail_id):
+
+        _ds = Description(
+            _detail_id
+        )
+        for i in range(_detail_id * 6, (_detail_id + 1) * 6):
+            _ds.hand = "Hand {}".format(random.randint(1, 4))
+            _ds.summ = random.randint(4, 21)
+            _ds.cards = random.randint(1, 7)
+            # _ds.action = None
+            _ds.rate = random.randint(4, 100)
+            _ds.win = random.randint(4, 100)
+            _ds.detail_id = _detail_id
+
+            db.session.add(_ds)
 
     def detail_obj_list(self, summary_id, _ident):
 
