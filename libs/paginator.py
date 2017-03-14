@@ -3,23 +3,20 @@
 from math import ceil
 
 
-def paginate(_page, _query, _rec_number=20):
-
+def paginate(_page, _query, per_page=20):
     page = int(_page)
-    prev_page = page - 1
-    next_page = page + 1
+    record_query = _query.paginate(page, per_page, False)
 
-    records_count = _query.count()
-    pages_count = int(ceil(float(records_count) / _rec_number))
+    pages_count = int(ceil(record_query.total / float(per_page)))
 
-    page_records = _query.all()[_rec_number * prev_page: _rec_number * page]
+    record_items = record_query.items
 
     context = {
-        "page_records": page_records,
+        "page_records": record_items,
         "pages_count": pages_count,
         "page": page,
-        "prev_page": prev_page,
-        "next_page": next_page,
+        "prev_page": page - 1,
+        "next_page": page + 1,
     }
 
     return context

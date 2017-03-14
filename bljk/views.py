@@ -150,10 +150,6 @@ def detail(page=1, summ_id=None, identifier=None):
             Detail.query.distinct(Detail.identifier).all()
         ]
     )
-    print "-" * 100
-    print ident_list
-    print Detail.query.distinct(Detail.identifier)
-    print "-" * 100
 
     form.identifier.choices = ident_list
 
