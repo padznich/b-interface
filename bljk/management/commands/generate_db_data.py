@@ -42,6 +42,7 @@ class FillDB(Command):
             j += 1
             _dt.game_id = j
             db.session.add(_dt)
+            self.description_obj(j)
 
     def summary_obj(self, _date, _ident):
 

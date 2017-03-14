@@ -2,7 +2,7 @@
 {% block title %}Summary History{% endblock %}
 
 {% block content %}
-    <form class="form-horizontal" method="GET" action="">
+    <form class="form-horizontal col-md-offset-8" method="GET" action="">
         <div class="form-group">
                 {{ forms.identifier.label }} {{ forms.identifier(size=9) }}
                 {{ forms.date_from.label }} {{ forms.date_from(size=9) }}
@@ -188,5 +188,4 @@
             {% endfor %}
         </tbody>
     </table>
-
 {% endblock %}

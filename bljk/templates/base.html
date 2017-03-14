@@ -10,11 +10,13 @@
     <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
 
     {% block sidebar %}
-    <nav role="navigation" class="col-lg-12">
-        <span class="col-sm-3 col-xs-8"><a class="navbar-brand" href="{{ url_for('summary') }}">Summary</a></span>
-        <span class="col-sm-3 col-xs-8"><a class="navbar-brand" href="{{ url_for('detail') }}">Detail</a></span>
-        <span class="col-sm-3 col-xs-8"><a class="navbar-brand" href="{{ url_for('description') }}">Description</a></span>
-    </nav>
+    <div class="col-lg-12">
+        <nav role="navigation" class="col-lg-12">
+            <span class="col-sm-1 col-xs-4"><a class="navbar-brand" href="{{ url_for('summary') }}">Summary</a></span>
+            <span class="col-sm-1 col-xs-4"><a class="navbar-brand" href="{{ url_for('detail') }}">Detail</a></span>
+            <span class="col-sm-1 col-xs-4"><a class="navbar-brand" href="{{ url_for('description') }}">Description</a></span>
+        </nav>
+    </div>
     {% endblock %}
 
     <div id="content">
@@ -51,8 +53,6 @@
 
         {% endblock %}
     </div>
-
-    <!--<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>-->
 
 </body>
 </html>

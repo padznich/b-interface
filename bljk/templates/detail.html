@@ -2,7 +2,7 @@
 {% block title %}Detail History{% endblock %}
 
 {% block content %}
-    <form class="form-horizontal" method="get" action="">
+    <form class="form-horizontal col-md-offset-8" method="get" action="">
         <div class="form-group">
             {{ form.csrf_token }}
             {{ form.identifier.label }} {{ form.identifier }}
