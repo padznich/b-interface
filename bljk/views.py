@@ -4,6 +4,7 @@ from datetime import datetime
 
 from flask import render_template, redirect, request
 from sqlalchemy_utils import sort_query
+from sqlalchemy import func
 
 from bljk.app import app
 from bljk.forms import FormSummary, FormDetail
@@ -53,7 +54,7 @@ def summary(col=None, _order=None, identifier=None, _from=None, _to=None):
             Summary.winnings,
             Summary.pending,
             Summary.identifier,
-            (Summary.wagered / Summary.plays).label("rate")
+            (Summary.wagered / func.nullif(Summary.plays, 0)).label("rate")
         )
 
     page = request.args.get("page") or 1
