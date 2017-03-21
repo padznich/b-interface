@@ -23,7 +23,8 @@ class FillDB(Command):
             _ds.hand = "Hand {}".format(random.randint(1, 4))
             _ds.summ = random.randint(4, 21)
             _ds.cards = random.randint(1, 7)
-            # _ds.action = None
+            _ds.action = None
+            _ds.strategy = False
             _ds.rate = random.randint(4, 100)
             _ds.win = random.randint(4, 100)
             _ds.detail_id = _detail_id
@@ -41,6 +42,8 @@ class FillDB(Command):
         for j, row in enumerate(range(20)):
             j += 1
             _dt.game_id = j
+            _dt.strategy = False
+            _dt.confirmed = False
             db.session.add(_dt)
             self.description_obj(j)
 

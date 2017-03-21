@@ -6,14 +6,15 @@
     <table class="col-lg-12">
         <thead>
             <tr>
-                <td class="col-dm-1">id</td>
-                <td class="col-dm-1">hand</td>
-                <td class="col-dm-1">summ</td>
-                <td class="col-dm-2">cards</td>
-                <td class="col-dm-1">action</td>
-                <td class="col-dm-1">rate</td>
-                <td class="col-dm-1">win</td>
-                <td class="col-dm-1">detail_id</td>
+                <td class="col-md-1 col-xs-3">id</td>
+                <td class="col-md-1 col-xs-3">hand</td>
+                <td class="col-md-1 col-xs-3">summ</td>
+                <td class="col-md-2 col-xs-3">cards</td>
+                <td class="col-md-1 col-xs-3">action</td>
+                <td class="col-md-1 col-xs-3">strategy</td>
+                <td class="col-md-1 col-xs-3">rate</td>
+                <td class="col-md-1 col-xs-3">win</td>
+                <td class="col-md-1 col-xs-3">detail_id</td>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,13 @@
                 <td>{{ rec.summ }}</td>
                 <td>{{ rec.cards }}</td>
                 <td>{{ rec.action }}</td>
+                <td>
+                    {% if rec.strategy %}
+                        <h4 class="label label-success">OK</h4>
+                    {% else %}
+                        <h4 class="label label-danger">NOT OK</h4>
+                    {% endif %}
+                </td>
                 <td>{{ rec.rate }}</td>
                 <td>{{ rec.win }}</td>
                 <td>{{ rec.detail_id }}</td>

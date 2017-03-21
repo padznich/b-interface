@@ -2,7 +2,7 @@
 {% block title %}Summary History{% endblock %}
 
 {% block content %}
-    <form class="form-horizontal col-md-offset-8" method="GET" action="">
+    <form class="form-horizontal col-md-offset-8 col-xs-offset-3 col-sm-offset-2 col-md-offset-6" method="GET" action="">
         <div class="form-group">
                 {{ forms.identifier.label }} {{ forms.identifier(size=9) }}
                 {{ forms.date_from.label }} {{ forms.date_from(size=9) }}
@@ -15,150 +15,150 @@
     <table class="col-lg-12">
         <thead id="head">
             <tr>
-                <td class="col-dm-1">
+                <td class="col-md-1 col-xs-3">
                     ID
                     <div class="btn-group btn-group-xs" role="group">
-                        <a href="{{ urlic }}col/id/desc/">
+                        <a href="{{ modify_query(col='id', _order='desc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/id/asc/">
+                        <a href="{{ modify_query(col='id', _order='asc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
                             </button>
                         </a>
                     </div>
                 </td>
-                <td class="col-dm-1">
+                <td class="col-md-1 col-xs-3">
                     DATE
                     <div class="btn-group btn-group-xs" role="group">
-                        <a href="{{ urlic }}col/date/desc/">
+                        <a href="{{ modify_query(col='date', _order='desc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/date/asc/">
+                        <a href="{{ modify_query(col='date', _order='asc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
                             </button>
                         </a>
                     </div>
                 </td>
-                <td class="col-dm-1">
+                <td class="col-md-1 col-xs-3">
                     GAME
                     <div class="btn-group btn-group-xs" role="group">
-                        <a href="{{ urlic }}col/game/desc/">
+                        <a href="{{ modify_query(col='game', _order='desc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/game/asc/">
+                        <a href="{{ modify_query(col='game', _order='asc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
                             </button>
                         </a>
                     </div>
                 </td>
-                <td class="col-dm-1">
+                <td class="col-md-1 col-xs-3">
                     MIN
                     <div class="btn-group btn-group-xs" role="group">
-                        <a href="{{ urlic }}col/min/desc/">
+                        <a href="{{ modify_query(col='min', _order='desc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/min/asc/">
+                        <a href="{{ modify_query(col='min', _order='asc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
                             </button>
                         </a>
                     </div>
                 </td>
-                <td class="col-dm-1">
+                <td class="col-md-1 col-xs-3">
                     PLAYS
                     <div class="btn-group btn-group-xs" role="group">
-                        <a href="{{ urlic }}col/plays/desc/">
+                        <a href="{{ modify_query(col='plays', _order='desc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/plays/asc/">
+                        <a href="{{ modify_query(col='plays', _order='asc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
                             </button>
                         </a>
                     </div>
                 </td>
-                <td class="col-dm-1">
+                <td class="col-md-1 col-xs-3">
                     WAGERED
                     <div class="btn-group btn-group-xs" role="group">
-                        <a href="{{ urlic }}col/wagered/desc/">
+                        <a href="{{ modify_query(col='wagered', _order='desc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/wagered/asc/">
+                        <a href="{{ modify_query(col='wagered', _order='asc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
                             </button>
                         </a>
                     </div>
                 </td>
-                <td class="col-dm-1">
+                <td class="col-md-1 col-xs-3">
                     RATE
                     <div class="btn-group btn-group-xs" role="group">
-                        <a href="{{ urlic }}col/rate/desc/">
+                        <a href="{{ modify_query(col='rate', _order='desc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/rate/asc/">
+                        <a href="{{ modify_query(col='rate', _order='asc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
                             </button>
                         </a>
                     </div>
                 </td>
-                <td class="col-dm-1">
+                <td class="col-md-1 col-xs-3">
                     WINNINGS
                     <div class="btn-group btn-group-xs" role="group">
-                        <a href="{{ urlic }}col/winnings/desc/">
+                        <a href="{{ modify_query(col='winnings', _order='desc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/winnings/asc/">
+                        <a href="{{ modify_query(col='winnings', _order='asc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
                             </button>
                         </a>
                     </div>
                 </td>
-                <td class="col-dm-1">
+                <td class="col-md-1 col-xs-3">
                     PENDING
                     <div class="btn-group btn-group-xs" role="group">
-                        <a href="{{ urlic }}col/pending/desc/">
+                        <a href="{{ modify_query(col='pending', _order='desc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/pending/asc/">
+                        <a href="{{ modify_query(col='pending', _order='asc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
                             </button>
                         </a>
                     </div>
                 </td>
-                <td class="col-dm-1">
+                <td class="col-md-1 col-xs-3">
                     IDENTIFIER
                     <div class="btn-group btn-group-xs" role="group">
-                        <a href="{{ urlic }}col/identifier/desc/">
+                        <a href="{{ modify_query(col='identifier', _order='desc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                             </button>
                         </a>
-                        <a href="{{ urlic }}col/identifier/asc/">
+                        <a href="{{ modify_query(col='identifier', _order='asc') }}">
                             <button type="button" class="btn btn-default btn-xs">
                                 <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
                             </button>
@@ -170,8 +170,8 @@
         <tbody>
             {% for rec in page_records %}
                 <tr>
-                    <td class="col-dm-1">
-                        <a href="/detail/summary/{{ rec.id }}/">
+                    <td class="col-md-1 col-xs-3">
+                        <a href="/detail/?summ_id={{ rec.id }}">
                             {{ rec.id }}
                         </a>
                     </td>
@@ -188,4 +188,5 @@
             {% endfor %}
         </tbody>
     </table>
+
 {% endblock %}

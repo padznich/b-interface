@@ -9,3 +9,6 @@ venv/
 
 # SQLlite
 *.db
+
+# CSV files
+*.csv

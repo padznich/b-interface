@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,29 +9,38 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ url_for('static', filename='css/bootstrap-toggle.min.css') }}">
+
+	<link rel="canonical" href="http://www.bootstraptoggle.com">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/github.min.css" rel="stylesheet" >
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
     {% block sidebar %}
-    <div class="col-lg-12">
+    <div class="col-lg-12 col-xs-12">
         <nav role="navigation" class="col-lg-12">
-            <span class="col-sm-1 col-xs-4"><a class="navbar-brand" href="{{ url_for('summary') }}">Summary</a></span>
-            <span class="col-sm-1 col-xs-4"><a class="navbar-brand" href="{{ url_for('detail') }}">Detail</a></span>
-            <span class="col-sm-1 col-xs-4"><a class="navbar-brand" href="{{ url_for('description') }}">Description</a></span>
+            <span class="col-md-1 col-xs-4"><a class="navbar-brand" href="{{ url_for('summary') }}">Summary</a></span>
+            <span class="col-md-1 col-xs-4"><a class="navbar-brand" href="{{ url_for('detail') }}">Detail</a></span>
+            <span class="col-md-1 col-xs-4"><a class="navbar-brand" href="{{ url_for('description') }}">Description</a></span>
+            <span class="col-md-1 col-xs-4"><a class="navbar-brand" href="/admin">Admin</a></span>
         </nav>
     </div>
     {% endblock %}
+
+</head>
+<body>
 
     <div id="content">
         <hr/>
         {% block content %}{% endblock %}
     </div>
 
-</head>
-<body>
-    <div id="paginator">
+    <div id="paginator" class="col-lg-12 col-xs-12">
         {% block pagin %}
 
         {% if prev_page %}
-        <a href="?page={{ prev_page }}">
+        <a href="{{ modify_query(page=prev_page) }}">
             <button type="button" class="btn btn-outline-success btn-sm" data-toggle="tooltip"
                     data-placement="left" title="To previous page">
                 Previous
@@ -42,7 +52,7 @@
             </span>
 
             {% if next_page <= pages_count %}
-            <a href="?page={{ next_page }}  ">
+            <a href="{{ modify_query(page=next_page) }}">
 
                 <button type="button" class="btn btn-outline-success btn-sm" data-toggle="tooltip"
                         data-placement="right" title="To next page">
@@ -53,6 +63,9 @@
 
         {% endblock %}
     </div>
+
+    <script src="{{ url_for('static', filename='js/bootstrap-toggle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 </html>

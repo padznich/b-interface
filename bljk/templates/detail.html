@@ -9,17 +9,23 @@
         <input class="btn btn-outline-primary" type="submit" value="Filter"/>
         </div>
     </form>
+        <div>
+            <a href="{{ modify_query(confirmed=True) }}">Confirmed</a>
+            <a href="{{ modify_query(confirmed=False) }}"> Not Confirmed</a>
+        </div>
     <hr/>
-    <table class="col-lg-12">
+    <table class="col-lg-12" id="data-table">
         <thead>
             <tr>
-                <td class="col-dm-1">id</td>
-                <td class="col-dm-1">game_id</td>
-                <td class="col-dm-1">time</td>
-                <td class="col-dm-1">wagered</td>
-                <td class="col-dm-1">result</td>
-                <td class="col-dm-1">summary_id</td>
-                <td class="col-dm-1">identifier</td>
+                <td class="col-md-1 col-xs-3">id</td>
+                <td class="col-md-1 col-xs-3">game_id</td>
+                <td class="col-md-1 col-xs-3">time</td>
+                <td class="col-md-1 col-xs-3">wagered</td>
+                <td class="col-md-1 col-xs-3">result</td>
+                <td class="col-md-1 col-xs-3">summary_id</td>
+                <td class="col-md-1 col-xs-3">strategy</td>
+                <td class="col-md-1 col-xs-3">confirmed</td>
+                <td class="col-md-1 col-xs-3">identifier</td>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +41,28 @@
                 <td>{{ rec.wagered }}</td>
                 <td>{{ rec.result }}</td>
                 <td>{{ rec.summary_id }}</td>
+                <td>
+                    {% if rec.strategy %}
+                        <h4 class="label label-success">OK</h4>
+                    {% else %}
+                        <h4 class="label label-danger">NOT OK</h4>
+                    {% endif %}</td>
+                <td>
+                    <a class="toggle" id="detail_check">
+                        <input type="checkbox"
+                           {% if rec.confirmed %}
+                               checked
+                           {% endif %}
+                           class="toggle-trigger"
+                           name="detail_id"
+                           value="{{ rec.id }}"
+                           data-toggle="toggle"
+                           data-onstyle="success" data-offstyle="danger"
+                           data-style="ios"
+                           data-size="mini"
+                           data-on="OK" data-off="FAIL"/>
+                    </a>
+                </td>
                 <td>{{ rec.identifier }}</td>
             </tr>
             {% endfor %}
